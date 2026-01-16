@@ -6,7 +6,7 @@ import helmet from 'helmet';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
-      origin: ['http://localhost:3000'],
+      origin: ['http://localhost:3000', 'https://zen-client-delta.vercel.app'],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
       credentials: true,
     },
@@ -15,6 +15,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useStaticAssets(`src/uploads/`, { prefix: '/uploads/' });
   app.use(helmet({ crossOriginResourcePolicy: false }));
-  await app.listen(3001);
+  await app.listen(process.env.PORT || 3001);
 }
 bootstrap();

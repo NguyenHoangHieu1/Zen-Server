@@ -5,10 +5,10 @@ config();
 
 export const client: RedisClientType = createClient({
   socket: {
-    host: process.env.REDIS_HOST,
-    port: parseInt(process.env.REDIS_PORT),
+    host: process.env.CLOUD_REDIS_HOST,
+    port: parseInt(process.env.CLOUD_REDIS_PORT),
   },
-  // password: process.env.REDIS_PASSWORD,
+  password: process.env.CLOUD_REDIS_PASSWORD,
 });
 
 client.on('error', (err) => console.error(err));

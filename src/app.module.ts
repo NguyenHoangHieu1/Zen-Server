@@ -59,14 +59,15 @@ import { ReportsModule } from './modules/reports/reports.module';
     }),
     BullModule.forRoot({
       redis: {
-        host: process.env.REDIS_HOST,
-        port: +process.env.REDIS_PORT,
+        host: process.env.CLOUD_REDIS_HOST,
+        port: +process.env.CLOUD_REDIS_PORT,
+        password: process.env.CLOUD_REDIS_PASSWORD,
       },
     }),
     CacheModule.register<RedisClientOptions>({
       isGlobal: true,
       store: redisStore,
-      url: 'redis://localhost:6379',
+      url: `redis://:${process.env.CLOUD_REDIS_PASSWORD}@${process.env.CLOUD_REDIS_HOST}:${process.env.CLOUD_REDIS_PORT}`,
     }),
     UsersModule,
     AuthModule,

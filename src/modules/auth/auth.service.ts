@@ -145,18 +145,18 @@ export class AuthService {
       password: hashedPassword,
     });
     await this.chatSystemService.create(createdUser._id);
-    let token = v4() + randomBytes(12).toString('hex');
-    createdUser.token = token;
+    // let token = v4() + randomBytes(12).toString('hex');
+    // createdUser.token = token;
 
-    this.mailerService.sendMail({
-      from: 'hoanghieufro@gmail.com',
-      to: createUserDto.email,
-      subject: 'Thank you for trusting our service!',
-      html: `<h1>Welcome abroad</h1>
-      <h3>Welcome to Zed<h3>
-      <p>Thank you so much for joining with us :) we will make sure that the experiences you get will be worth it!</p>
-      <code><a href="http://localhost:3000/validate-account/${token}">Click here to verify</a></code>`,
-    });
+    // this.mailerService.sendMail({
+    //   from: 'hoanghieufro@gmail.com',
+    //   to: createUserDto.email,
+    //   subject: 'Thank you for trusting our service!',
+    //   html: `<h1>Welcome abroad</h1>
+    //   <h3>Welcome to Zed<h3>
+    //   <p>Thank you so much for joining with us :) we will make sure that the experiences you get will be worth it!</p>
+    //   <code><a href="http://localhost:3000/validate-account/${token}">Click here to verify</a></code>`,
+    // });
     await this.friendsService.createFriendTable(createdUser._id);
     await createdUser.save();
     let fileName = '';
